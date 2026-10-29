@@ -1,0 +1,26 @@
+
+{
+  "produtos": [
+    {
+      "id": "ez-vip-black",
+      "nome": "EZ VIP Black",
+      "preco": 55,
+      "estoque": 0,
+      "imagem": "Assets/ez-vip-black.jpg"
+    },
+    {
+      "id": "ez-black",
+      "nome": "EZ Black",
+      "preco": 55,
+      "estoque": 0,
+      "imagem": "Assets/ez-black.jpg"
+    },
+    {
+      "id": "ez-vip-men",
+      "nome": "EZ VIP Men",
+      "preco": 55,
+      "estoque": 0,
+      "imagem": "Assets/ez-vip-men.jpg"
+    }
+  ]
+}

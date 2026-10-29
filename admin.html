@@ -13,13 +13,15 @@ main{max-width:650px;margin:25px auto}
 h1,h2{color:#e7bd76}
 input,button{width:100%;padding:13px;margin:8px 0;border-radius:8px;font-size:16px}
 input{border:1px solid #aaa}
+input[type=file]{background:#fff;color:#111}
 button{background:#d5aa60;color:#111;font-weight:bold;border:0;cursor:pointer}
 .secondary{background:#444;color:#fff}
 .danger{background:#a32e2e;color:white}
 .item{background:#303030;padding:12px;margin:8px 0;border-radius:8px;overflow-wrap:anywhere}
+.preview{max-width:180px;max-height:180px;object-fit:contain;display:block;margin:8px 0;border-radius:8px}
+.hint{font-size:12px;color:#ccc;line-height:1.5}
 #painel{display:none}
 #mensagem{overflow-wrap:anywhere}
-small{color:#ccc}
 </style>
 </head>
 <body>
@@ -50,6 +52,8 @@ small{color:#ccc}
 <h2>Painel</h2>
 <p>Seus dados ficam salvos neste navegador.</p>
 <button id="backup">Baixar backup dos dados</button>
+<button id="exportarCatalogo">Baixar catálogo para publicar no site</button>
+<p class="hint">Depois de baixar, envie o arquivo catalogo.json para a pasta principal do repositório GitHub, substituindo o arquivo anterior.</p>
 <button id="sair" class="secondary">Sair</button>
 </div>
 
@@ -59,6 +63,10 @@ small{color:#ccc}
 <input id="nomeProduto" placeholder="Nome do perfume" required>
 <input id="precoProduto" type="number" min="0" step="0.01" placeholder="Preço de venda (R$)" required>
 <input id="estoqueProduto" type="number" min="0" step="1" placeholder="Quantidade em estoque" required>
+<label for="imagemProduto">Foto do perfume</label>
+<input id="imagemProduto" type="file" accept="image/*">
+<img id="previewImagem" class="preview" alt="Prévia da foto" hidden>
+<p class="hint">A foto será reduzida automaticamente para deixar o catálogo mais leve.</p>
 <button type="submit">Adicionar perfume</button>
 </form>
 <div id="listaProdutos"></div>
@@ -144,10 +152,7 @@ $("formCadastro").onsubmit = async e => {
   const senhaHash = Array.from(new Uint8Array(hash))
     .map(b => b.toString(16).padStart(2, "0")).join("");
 
-  localStorage.setItem(CHAVE_CONTA, JSON.stringify({
-    email, senhaHash
-  }));
-
+  localStorage.setItem(CHAVE_CONTA, JSON.stringify({email, senhaHash}));
   sessionStorage.setItem(CHAVE_SESSAO, "sim");
   $("formCadastro").reset();
   mensagem("Acesso criado neste aparelho.");
@@ -201,11 +206,21 @@ function renderizar() {
   produtos.forEach((p, i) => {
     const item = document.createElement("div");
     item.className = "item";
+
     const titulo = document.createElement("strong");
     titulo.textContent = p.nome;
+
     const detalhes = document.createElement("p");
     detalhes.textContent =
-      `Preço: R$ ${p.preco.toFixed(2)} | Estoque: ${p.estoque}`;
+      `Preço: R$ ${Number(p.preco).toFixed(2)} | Estoque: ${p.estoque}`;
+
+    if (p.imagem) {
+      const foto = document.createElement("img");
+      foto.src = p.imagem;
+      foto.alt = p.nome;
+      foto.className = "preview";
+      item.append(foto);
+    }
 
     const btn = document.createElement("button");
     btn.textContent = "Excluir perfume";
@@ -246,6 +261,25 @@ function renderizar() {
   });
 }
 
+$("imagemProduto").onchange = () => {
+  const arquivo = $("imagemProduto").files[0];
+  if (!arquivo) {
+    $("previewImagem").hidden = true;
+    return;
+  }
+  if (!arquivo.type.startsWith("image/")) {
+    mensagem("Escolha um arquivo de imagem válido.");
+    $("imagemProduto").value = "";
+    return;
+  }
+  const leitor = new FileReader();
+  leitor.onload = () => {
+    $("previewImagem").src = leitor.result;
+    $("previewImagem").hidden = false;
+  };
+  leitor.readAsDataURL(arquivo);
+};
+
 $("formProduto").onsubmit = e => {
   e.preventDefault();
   if (!autenticado()) return;
@@ -261,11 +295,49 @@ $("formProduto").onsubmit = e => {
   }
 
   const produtos = ler(CHAVE_PRODUTOS, []);
-  produtos.push({ nome, preco, estoque });
-  salvar(CHAVE_PRODUTOS, produtos);
-  e.target.reset();
-  renderizar();
-  mensagem("Perfume cadastrado!");
+  const arquivoFoto = $("imagemProduto").files[0];
+
+  const concluir = imagem => {
+    produtos.push({
+      id: "perfume-" + Date.now(),
+      nome,
+      preco,
+      estoque,
+      imagem: imagem || ""
+    });
+    salvar(CHAVE_PRODUTOS, produtos);
+    e.target.reset();
+    $("previewImagem").hidden = true;
+    $("previewImagem").removeAttribute("src");
+    renderizar();
+    mensagem("Perfume cadastrado! Baixe o catálogo para publicar a alteração na loja.");
+  };
+
+  if (!arquivoFoto) {
+    concluir("");
+    return;
+  }
+
+  if (arquivoFoto.size > 8 * 1024 * 1024) {
+    mensagem("A foto deve ter no máximo 8 MB.");
+    return;
+  }
+
+  const leitor = new FileReader();
+  leitor.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const escala = Math.min(1, 900 / Math.max(img.width, img.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(img.width * escala));
+      canvas.height = Math.max(1, Math.round(img.height * escala));
+      canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+      concluir(canvas.toDataURL("image/jpeg", 0.78));
+    };
+    img.onerror = () => mensagem("Não foi possível ler essa imagem.");
+    img.src = leitor.result;
+  };
+  leitor.readAsDataURL(arquivoFoto);
 };
 
 $("formCupom").onsubmit = e => {
@@ -287,11 +359,37 @@ $("formCupom").onsubmit = e => {
     return;
   }
 
-  cupons.push({ codigo, desconto });
+  cupons.push({codigo, desconto});
   salvar(CHAVE_CUPONS, cupons);
   e.target.reset();
   renderizar();
   mensagem("Cupom cadastrado!");
+};
+
+$("exportarCatalogo").onclick = () => {
+  if (!autenticado()) return;
+
+  const dados = {
+    produtos: ler(CHAVE_PRODUTOS, []).map((p, i) => ({
+      id: p.id || ("perfume-" + i),
+      nome: p.nome,
+      preco: Number(p.preco),
+      estoque: Number(p.estoque),
+      imagem: p.imagem || ""
+    }))
+  };
+
+  const arquivo = new Blob(
+    [JSON.stringify(dados, null, 2)],
+    {type: "application/json"}
+  );
+  const url = URL.createObjectURL(arquivo);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "catalogo.json";
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  mensagem("Catálogo baixado! Agora publique catalogo.json no GitHub.");
 };
 
 $("backup").onclick = () => {
@@ -303,14 +401,14 @@ $("backup").onclick = () => {
   };
   const arquivo = new Blob(
     [JSON.stringify(dados, null, 2)],
-    { type: "application/json" }
+    {type: "application/json"}
   );
   const url = URL.createObjectURL(arquivo);
   const link = document.createElement("a");
   link.href = url;
   link.download = "backup-alison-perfumaria.json";
   link.click();
-  URL.revokeObjectURL(url);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 };
 
 $("restaurar").onclick = () => {
@@ -332,7 +430,8 @@ $("restaurar").onclick = () => {
           !dados.produtos.every(p =>
             typeof p.nome === "string" &&
             Number.isFinite(p.preco) && p.preco >= 0 &&
-            Number.isInteger(p.estoque) && p.estoque >= 0
+            Number.isInteger(p.estoque) && p.estoque >= 0 &&
+            (p.imagem === undefined || typeof p.imagem === "string")
           ) ||
           !dados.cupons.every(c =>
             typeof c.codigo === "string" &&

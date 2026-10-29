@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin | Alison Perfumaria</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:20px;background:#111;color:#fff;font-family:Arial,sans-serif}
+main{max-width:650px;margin:25px auto}
+.card{background:#202020;padding:20px;border-radius:14px;margin-bottom:18px}
+h1,h2{color:#e7bd76}
+input,button{width:100%;padding:13px;margin:8px 0;border-radius:8px;font-size:16px}
+input{border:1px solid #aaa}
+button{background:#d5aa60;color:#111;font-weight:bold;border:0;cursor:pointer}
+.secondary{background:#444;color:#fff}
+.danger{background:#a32e2e;color:white}
+.item{background:#303030;padding:12px;margin:8px 0;border-radius:8px;overflow-wrap:anywhere}
+#painel{display:none}
+#mensagem{overflow-wrap:anywhere}
+small{color:#ccc}
+</style>
+</head>
+<body>
+<main>
+<h1>Alison Perfumaria</h1>
+<p>Painel administrativo</p>
+
+<section class="card" id="login">
+<h2>Entrar</h2>
+<form id="formLogin">
+<input id="email" type="email" placeholder="E-mail" required autocomplete="username">
+<input id="senha" type="password" placeholder="Senha" required autocomplete="current-password">
+<button type="submit">Entrar</button>
+</form>
+<small>Primeiro acesso? Cadastre seu e-mail e senha abaixo.</small>
+<button class="secondary" id="mostrarCadastro" type="button">Criar acesso neste aparelho</button>
+<form id="formCadastro" hidden>
+<input id="novoEmail" type="email" placeholder="Seu e-mail" required>
+<input id="novaSenha" type="password" minlength="8" placeholder="Crie uma senha (mínimo 8 caracteres)" required>
+<button type="submit">Criar acesso</button>
+</form>
+</section>
+
+<p id="mensagem" role="status"></p>
+
+<section id="painel">
+<div class="card">
+<h2>Painel</h2>
+<p>Seus dados ficam salvos neste navegador.</p>
+<button id="backup">Baixar backup dos dados</button>
+<button id="sair" class="secondary">Sair</button>
+</div>
+
+<div class="card">
+<h2>Cadastrar perfume</h2>
+<form id="formProduto">
+<input id="nomeProduto" placeholder="Nome do perfume" required>
+<input id="precoProduto" type="number" min="0" step="0.01" placeholder="Preço de venda (R$)" required>
+<input id="estoqueProduto" type="number" min="0" step="1" placeholder="Quantidade em estoque" required>
+<button type="submit">Adicionar perfume</button>
+</form>
+<div id="listaProdutos"></div>
+</div>
+
+<div class="card">
+<h2>Criar cupom</h2>
+<form id="formCupom">
+<input id="codigoCupom" placeholder="Código do cupom" required>
+<input id="descontoCupom" type="number" min="0.01" max="100" step="0.01" placeholder="Desconto (%)" required>
+<button type="submit">Adicionar cupom</button>
+</form>
+<div id="listaCupons"></div>
+</div>
+
+<div class="card">
+<h2>Restaurar backup</h2>
+<p>Importe um backup JSON feito anteriormente.</p>
+<input type="file" id="arquivoBackup" accept=".json,application/json">
+<button id="restaurar">Restaurar dados</button>
+</div>
+</section>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const EMAIL_ADMIN = "alisongiliarde@gmail.com";
+const CHAVE_CONTA = "alison_admin_local";
+const CHAVE_PRODUTOS = "alison_produtos";
+const CHAVE_CUPONS = "alison_cupons";
+const CHAVE_SESSAO = "alison_sessao_local";
+
+function ler(chave, padrao) {
+  try {
+    const valor = localStorage.getItem(chave);
+    return valor === null ? padrao : JSON.parse(valor);
+  } catch {
+    return padrao;
+  }
+}
+
+function mensagem(texto) {
+  $("mensagem").textContent = texto;
+}
+
+function conta() {
+  return ler(CHAVE_CONTA, null);
+}
+
+function autenticado() {
+  return sessionStorage.getItem(CHAVE_SESSAO) === "sim";
+}
+
+function abrirPainel() {
+  $("login").style.display = autenticado() ? "none" : "block";
+  $("painel").style.display = autenticado() ? "block" : "none";
+  if (autenticado()) renderizar();
+}
+
+$("mostrarCadastro").onclick = () => {
+  $("formCadastro").hidden = !$("formCadastro").hidden;
+};
+
+$("formCadastro").onsubmit = async e => {
+  e.preventDefault();
+
+  if (conta()) {
+    mensagem("Já existe uma conta neste navegador. Entre com ela.");
+    return;
+  }
+
+  const email = $("novoEmail").value.trim().toLowerCase();
+  const senha = $("novaSenha").value;
+
+  if (email !== EMAIL_ADMIN) {
+    mensagem("Use o e-mail de administrador configurado no código.");
+    return;
+  }
+
+  const hash = await crypto.subtle.digest(
+    "SHA-256", new TextEncoder().encode(senha)
+  );
+  const senhaHash = Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, "0")).join("");
+
+  localStorage.setItem(CHAVE_CONTA, JSON.stringify({
+    email, senhaHash
+  }));
+
+  sessionStorage.setItem(CHAVE_SESSAO, "sim");
+  $("formCadastro").reset();
+  mensagem("Acesso criado neste aparelho.");
+  abrirPainel();
+};
+
+$("formLogin").onsubmit = async e => {
+  e.preventDefault();
+  const cadastro = conta();
+  const email = $("email").value.trim().toLowerCase();
+  const senha = $("senha").value;
+
+  if (!cadastro || email !== cadastro.email) {
+    mensagem("Conta não encontrada neste navegador.");
+    return;
+  }
+
+  const hash = await crypto.subtle.digest(
+    "SHA-256", new TextEncoder().encode(senha)
+  );
+  const senhaHash = Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, "0")).join("");
+
+  if (senhaHash !== cadastro.senhaHash) {
+    mensagem("Senha incorreta.");
+    return;
+  }
+
+  sessionStorage.setItem(CHAVE_SESSAO, "sim");
+  $("formLogin").reset();
+  mensagem("Login realizado!");
+  abrirPainel();
+};
+
+$("sair").onclick = () => {
+  sessionStorage.removeItem(CHAVE_SESSAO);
+  mensagem("Você saiu da conta.");
+  abrirPainel();
+};
+
+function salvar(chave, dados) {
+  localStorage.setItem(chave, JSON.stringify(dados));
+}
+
+function renderizar() {
+  const produtos = ler(CHAVE_PRODUTOS, []);
+  const cupons = ler(CHAVE_CUPONS, []);
+
+  $("listaProdutos").replaceChildren();
+
+  produtos.forEach((p, i) => {
+    const item = document.createElement("div");
+    item.className = "item";
+    const titulo = document.createElement("strong");
+    titulo.textContent = p.nome;
+    const detalhes = document.createElement("p");
+    detalhes.textContent =
+      `Preço: R$ ${p.preco.toFixed(2)} | Estoque: ${p.estoque}`;
+
+    const btn = document.createElement("button");
+    btn.textContent = "Excluir perfume";
+    btn.className = "danger";
+    btn.onclick = () => {
+      if (!confirm("Excluir este perfume?")) return;
+      const atual = ler(CHAVE_PRODUTOS, []);
+      atual.splice(i, 1);
+      salvar(CHAVE_PRODUTOS, atual);
+      renderizar();
+    };
+
+    item.append(titulo, detalhes, btn);
+    $("listaProdutos").append(item);
+  });
+
+  $("listaCupons").replaceChildren();
+
+  cupons.forEach((c, i) => {
+    const item = document.createElement("div");
+    item.className = "item";
+    const texto = document.createElement("p");
+    texto.textContent = `${c.codigo} — ${c.desconto}% de desconto`;
+
+    const btn = document.createElement("button");
+    btn.className = "danger";
+    btn.textContent = "Excluir cupom";
+    btn.onclick = () => {
+      if (!confirm("Excluir este cupom?")) return;
+      const atual = ler(CHAVE_CUPONS, []);
+      atual.splice(i, 1);
+      salvar(CHAVE_CUPONS, atual);
+      renderizar();
+    };
+
+    item.append(texto, btn);
+    $("listaCupons").append(item);
+  });
+}
+
+$("formProduto").onsubmit = e => {
+  e.preventDefault();
+  if (!autenticado()) return;
+
+  const nome = $("nomeProduto").value.trim();
+  const preco = Number($("precoProduto").value);
+  const estoque = Number($("estoqueProduto").value);
+
+  if (!nome || !Number.isFinite(preco) || preco < 0 ||
+      !Number.isInteger(estoque) || estoque < 0) {
+    mensagem("Confira os dados do perfume.");
+    return;
+  }
+
+  const produtos = ler(CHAVE_PRODUTOS, []);
+  produtos.push({ nome, preco, estoque });
+  salvar(CHAVE_PRODUTOS, produtos);
+  e.target.reset();
+  renderizar();
+  mensagem("Perfume cadastrado!");
+};
+
+$("formCupom").onsubmit = e => {
+  e.preventDefault();
+  if (!autenticado()) return;
+
+  const codigo = $("codigoCupom").value.trim().toUpperCase();
+  const desconto = Number($("descontoCupom").value);
+  const cupons = ler(CHAVE_CUPONS, []);
+
+  if (!codigo || !Number.isFinite(desconto) ||
+      desconto <= 0 || desconto > 100) {
+    mensagem("Desconto deve ser maior que 0 e até 100%.");
+    return;
+  }
+
+  if (cupons.some(c => c.codigo === codigo)) {
+    mensagem("Esse cupom já existe.");
+    return;
+  }
+
+  cupons.push({ codigo, desconto });
+  salvar(CHAVE_CUPONS, cupons);
+  e.target.reset();
+  renderizar();
+  mensagem("Cupom cadastrado!");
+};
+
+$("backup").onclick = () => {
+  if (!autenticado()) return;
+
+  const dados = {
+    produtos: ler(CHAVE_PRODUTOS, []),
+    cupons: ler(CHAVE_CUPONS, [])
+  };
+  const arquivo = new Blob(
+    [JSON.stringify(dados, null, 2)],
+    { type: "application/json" }
+  );
+  const url = URL.createObjectURL(arquivo);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "backup-alison-perfumaria.json";
+  link.click();
+  URL.revokeObjectURL(url);
+};
+
+$("restaurar").onclick = () => {
+  if (!autenticado()) return;
+
+  const arquivo = $("arquivoBackup").files[0];
+  if (!arquivo) {
+    mensagem("Selecione um arquivo de backup.");
+    return;
+  }
+
+  const leitor = new FileReader();
+  leitor.onload = () => {
+    try {
+      const dados = JSON.parse(leitor.result);
+
+      if (!dados || !Array.isArray(dados.produtos) ||
+          !Array.isArray(dados.cupons) ||
+          !dados.produtos.every(p =>
+            typeof p.nome === "string" &&
+            Number.isFinite(p.preco) && p.preco >= 0 &&
+            Number.isInteger(p.estoque) && p.estoque >= 0
+          ) ||
+          !dados.cupons.every(c =>
+            typeof c.codigo === "string" &&
+            Number.isFinite(c.desconto) &&
+            c.desconto > 0 && c.desconto <= 100
+          )) {
+        throw new Error("Formato inválido");
+      }
+
+      if (!confirm("Isso substituirá o estoque e os cupons atuais. Continuar?"))
+        return;
+
+      salvar(CHAVE_PRODUTOS, dados.produtos);
+      salvar(CHAVE_CUPONS, dados.cupons);
+      renderizar();
+      mensagem("Backup restaurado!");
+    } catch {
+      mensagem("Backup inválido ou corrompido.");
+    }
+  };
+  leitor.readAsText(arquivo);
+};
+
+abrirPainel();
+</script>
+</body>
+</html>

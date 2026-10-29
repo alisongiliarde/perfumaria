@@ -1,14 +1,5 @@
 const products = [
   {
-    id: "ez-black",
-    name: "EZ Black",
-    short: "Eau de Parfum · linha EZ",
-    price: 55,
-    image: "assets/ez-black.jpg",
-    description: "Uma opção de perfil elegante e marcante, com apresentação escura e visual sofisticado. Ideal para quem procura uma fragrância que acompanhe ocasiões especiais ou momentos em que quer transmitir presença. Consulte a embalagem para conferir as notas oficiais e as orientações do fabricante.",
-    tag: "Presença marcante"
-  },
-  {
     id: "ez-vip-black",
     name: "EZ VIP Black",
     short: "Eau de Parfum · linha EZ VIP",
@@ -16,6 +7,15 @@ const products = [
     image: "assets/ez-vip-black.jpg",
     description: "Com frasco em degradê preto e cinza e a assinatura “Define the Moment”, é uma escolha de estilo moderno para quem gosta de uma apresentação sofisticada. Uma opção para usar em encontros, saídas e ocasiões especiais. Consulte a embalagem para conferir as notas oficiais e as orientações do fabricante.",
     tag: "Estilo sofisticado"
+  },
+  {
+    id: "ez-black",
+    name: "EZ Black",
+    short: "Eau de Parfum · linha EZ",
+    price: 55,
+    image: "assets/ez-black.jpg",
+    description: "Uma opção de perfil elegante e marcante, com apresentação escura e visual sofisticado. Ideal para quem procura uma fragrância que acompanhe ocasiões especiais ou momentos em que quer transmitir presença. Consulte a embalagem para conferir as notas oficiais e as orientações do fabricante.",
+    tag: "Presença marcante"
   },
   {
     id: "ez-vip-men",

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171311">
+  <meta name="description" content="Conheça a seleção de perfumes da Alison Perfumaria e encontre sua próxima fragrância.">
+  <title>Alison Perfumaria | Fragrâncias para marcar presença</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topline">FRAGRÂNCIAS PARA MARCAR PRESENÇA</div>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Alison Perfumaria, início"><span class="brand-mark">A.</span><span><strong>ALISON</strong><small>PERFUMARIA</small></span></a>
+    <button class="bag-link" onclick="openCheckout()">Seu pedido <span id="cart-count">0</span></button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">SUA PRÓXIMA ASSINATURA</p>
+        <h1>Uma fragrância.<br><em>Uma presença.</em></h1>
+        <p>Descubra perfumes que combinam com o seu estilo e transforme cada ocasião em um momento especial.</p>
+        <a class="primary-btn" href="#colecao">Conhecer coleção <span>↘</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="halo"></div><div class="hero-bottle"><span>E.</span></div>
+        <div class="hero-caption">ENCONTRE SUA ESSÊNCIA</div>
+      </div>
+    </section>
+
+    <section class="collection" id="colecao">
+      <div class="section-heading">
+        <div><p class="eyebrow">SELEÇÃO ESPECIAL</p><h2>Escolha sua fragrância</h2></div>
+        <p class="section-note">Perfumes selecionados para diferentes estilos e ocasiões.</p>
+      </div>
+      <div class="products" id="products"></div>
+    </section>
+
+    <section class="service-strip">
+      <div><span>01</span><strong>Atendimento pessoal</strong><p>Tire suas dúvidas antes de escolher.</p></div>
+      <div><span>02</span><strong>Opção para presente</strong><p>Adicione uma bolsa de presente ao pedido.</p></div>
+      <div><span>03</span><strong>Pedido pelo WhatsApp</strong><p>Confirme os detalhes diretamente conosco.</p></div>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">A.</span><span><strong>ALISON</strong><small>PERFUMARIA</small></span></a><p>Alison Perfumaria — encontre a fragrância que combina com você.</p><small>Preços em reais. Disponibilidade sujeita à confirmação.</small></footer>
+
+  <div class="modal-backdrop" id="detail-modal" aria-hidden="true">
+    <section class="modal detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+      <button class="close" onclick="closeModal('detail-modal')" aria-label="Fechar">×</button>
+      <div class="detail-layout">
+        <div class="detail-image"><img id="detail-img" src="" alt=""></div>
+        <div class="detail-copy"><p class="eyebrow">DETALHES DA FRAGRÂNCIA</p><h2 id="detail-title"></h2><p class="detail-price" id="detail-price"></p><p id="detail-description"></p><p class="detail-disclaimer">As impressões olfativas podem variar de pessoa para pessoa. Consulte a embalagem para informações oficiais do fabricante.</p><button class="primary-btn full" id="detail-buy">Quero esse <span>→</span></button></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="checkout-modal" aria-hidden="true">
+    <section class="modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+      <button class="close" onclick="closeModal('checkout-modal')" aria-label="Fechar">×</button>
+      <p class="eyebrow">SÓ MAIS UM PASSO</p><h2 id="checkout-title">Finalize seu pedido</h2>
+      <div class="checkout-product"><img id="checkout-img" src="" alt=""><div><strong id="checkout-product-name"></strong><small>Perfume selecionado</small><b id="checkout-product-price"></b></div></div>
+      <div class="gift-option"><div><strong>Bolsa para presente Hinode</strong><p>Tamanho P · embalagem adicional para presentear</p><b>R$ 7,00</b></div><label class="switch"><input type="checkbox" id="gift-bag" onchange="updateTotal()"><span></span></label></div>
+      <div class="total-line"><span>Total estimado</span><strong id="checkout-total">R$ 55,00</strong></div>
+      <label class="field-label" for="customer-name">Seu nome (opcional)</label><input id="customer-name" class="text-field" placeholder="Como podemos te chamar?">
+      <label class="field-label" for="customer-note">Observação (opcional)</label><textarea id="customer-note" class="text-field" rows="2" placeholder="Ex.: é para presente"></textarea>
+      <button class="primary-btn full" onclick="sendOrder()">Continuar pelo WhatsApp <span>↗</span></button>
+      <p class="checkout-hint">O pedido será enviado para confirmação. Nenhum pagamento é cobrado neste site.</p>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

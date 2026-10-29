@@ -1,4 +1,4 @@
-# Essência Perfumaria — site inicial
+# Alison Perfumaria — site inicial
 
 Site estático para publicar no GitHub Pages. Inclui vitrine de três perfumes, descrição em uma janela de detalhes e checkout simples com opção de bolsa para presente Hinode tamanho P. O botão final prepara o pedido no WhatsApp.
 

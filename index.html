@@ -1,91 +1,54 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f6f2ec">
-  <meta name="description" content="Alison Perfumaria — fragrâncias para marcar presença.">
-  <title>Alison Perfumaria | Sua próxima fragrância</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/perfumaria/style.css?v=3">
-</head>
-<body>
-<header class="site-header">
-  <a class="brand" href="#inicio" aria-label="Alison Perfumaria início">
-    <span class="brand-mark">A</span><span>ALISON <small>PERFUMARIA</small></span>
-  </a>
-  <nav class="desktop-nav"><a href="#colecao">Coleção</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a></nav>
-  <button class="cart-trigger" id="cartBtn" aria-label="Abrir sacola">Sacola <span id="cartCount">0</span></button>
-  <button class="menu-trigger" id="menuBtn" aria-label="Abrir menu">☰</button>
-</header>
-<nav class="mobile-nav" id="mobileNav"><a href="#colecao">Coleção</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a></nav>
-
-<main id="inicio">
-  <section class="hero">
-    <div class="hero-copy">
-      <p class="eyebrow">ALISON PERFUMARIA · CURADORIA DE FRAGRÂNCIAS</p>
-      <h1>Uma fragrância.<br><em>Uma presença.</em></h1>
-      <p class="hero-description">Encontre o aroma que traduz seu estilo e transforma cada momento em uma lembrança.</p>
-      <a class="button button-dark" href="#colecao">Explorar coleção <span>↗</span></a>
-      <div class="hero-note">SUA ESSÊNCIA, SUA ASSINATURA.</div>
-    </div>
-    <div class="hero-art" aria-hidden="true">
-      <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
-      <div class="art-bottle"><div class="bottle-cap"></div><div class="bottle-neck"></div><div class="bottle-body"><span>A.</span><small>PARFUM</small></div></div>
-      <div class="art-caption">EAU DE PARFUM<br><b>THE ART OF SCENT</b></div>
-    </div>
-  </section>
-
-  <section class="collection section-wrap" id="colecao">
-    <div class="section-heading">
-      <div><p class="eyebrow">ESCOLHA A SUA</p><h2>Encontre sua <em>fragrância</em></h2></div>
-      <p>Uma seleção especial para acompanhar sua personalidade.</p>
-    </div>
-    <div class="filters" id="filters">
-      <button class="filter-btn active" data-filter="todos">Todos</button>
-      <button class="filter-btn" data-filter="masculino">Masculinos</button>
-      <button class="filter-btn" data-filter="feminino">Femininos</button>
-      <button class="filter-btn" data-filter="unissex">Unissex</button>
-    </div>
-    <div class="product-grid" id="products"></div>
-  </section>
-
-  <section class="promise" id="sobre">
-    <div><span>01</span><h3>Escolha com calma</h3><p>Conheça os detalhes de cada fragrância antes de decidir.</p></div>
-    <div><span>02</span><h3>Atendimento pessoal</h3><p>Tire suas dúvidas e receba ajuda para escolher.</p></div>
-    <div><span>03</span><h3>Pedido simples</h3><p>Finalize seu pedido diretamente pelo WhatsApp.</p></div>
-  </section>
-</main>
-
-<footer id="contato">
-  <div class="footer-main"><a class="brand brand-footer" href="#inicio"><span class="brand-mark">A</span><span>ALISON <small>PERFUMARIA</small></span></a><p>Encontre a fragrância que combina com você.</p><a class="footer-whatsapp" href="https://wa.me/5581999365569" target="_blank" rel="noopener">Fale com a gente ↗</a></div>
-  <div class="footer-bottom">© 2026 Alison Perfumaria. Preços e disponibilidade sujeitos à confirmação.</div>
-</footer>
-
-<div class="overlay" id="productOverlay" aria-hidden="true">
-  <section class="product-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <button class="close-btn" id="modalClose" aria-label="Fechar">×</button>
-    <div class="modal-image"><img id="modalImg" src="" alt=""></div>
-    <div class="modal-info"><p class="eyebrow">ALISON PERFUMARIA</p><h2 id="modalTitle"></h2><p id="modalShort" class="muted"></p><p class="modal-price" id="modalPrice"></p><p id="modalDescription" class="description"></p><div class="quantity"><button id="qtyMinus" aria-label="Diminuir">−</button><span id="qtyValue">1</span><button id="qtyPlus" aria-label="Aumentar">+</button></div><button class="button button-dark full" id="addToCart">Adicionar à sacola</button><button class="button button-outline full" id="buyNow">Comprar pelo WhatsApp ↗</button></div>
-  </section>
-</div>
-
-<div class="cart-overlay" id="cartOverlay" aria-hidden="true">
-  <aside class="cart-drawer">
-    <div class="drawer-heading"><h2>Sua sacola</h2><button class="close-btn" id="cartClose" aria-label="Fechar">×</button></div>
-    <div class="cart-items" id="cartItems"><p class="empty-cart">Sua sacola está vazia.</p></div>
-    <div class="drawer-footer" id="cartFooter" hidden>
-      <label class="gift-line"><input type="checkbox" id="giftCheck"> Embalagem para presente (+ R$ 7,00)</label>
-      <label class="field-label">Seu nome (opcional)<input id="clientName" type="text" placeholder="Como podemos chamar você?"></label>
-      <label class="field-label">Observação (opcional)<textarea id="clientNote" rows="2" placeholder="Alguma informação sobre o pedido?"></textarea></label>
-      <div class="total-line"><span>Total estimado</span><strong id="cartTotal">R$ 0,00</strong></div>
-      <button class="button button-dark full" id="checkoutBtn">Finalizar pelo WhatsApp ↗</button>
-      <p class="fine-print">Pedido sujeito à confirmação de disponibilidade. Nenhum pagamento é realizado neste site.</p>
-    </div>
-  </aside>
-</div>
-<script src="/perfumaria/script.js?v=3" defer></script>
-</body>
-</html>
+/* Alison Perfumaria — identidade visual editorial, creme e dourado */
+:root{--paper:#f6f2ec;--paper2:#eee7dc;--ink:#24221f;--muted:#81796f;--gold:#a88958;--line:#ded5c8;--white:#fffdfa;--serif:"Playfair Display",Georgia,serif;--sans:"DM Sans",Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body.locked{overflow:hidden}
+a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{cursor:pointer;border:0}
+.site-header{height:78px;padding:0 clamp(20px,6vw,90px);display:flex;align-items:center;justify-content:space-between;background:rgba(246,242,236,.94);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.17em;font-weight:700;line-height:1.2}.brand small{display:block;font-size:9px;letter-spacing:.28em;color:var(--muted);font-weight:500;margin-top:4px}
+.brand-mark{width:35px;height:35px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;font:italic 25px var(--serif);color:var(--gold)}
+.desktop-nav{display:flex;gap:38px;margin-left:auto;margin-right:42px}.desktop-nav a,.mobile-nav a{font-size:12px;color:#615b53;transition:color .2s}.desktop-nav a:hover,.mobile-nav a:hover{color:var(--gold)}
+.cart-trigger{background:transparent;border:1px solid var(--line);padding:10px 16px;font-size:11px;letter-spacing:.06em}.cart-trigger span{display:inline-grid;place-items:center;background:var(--ink);color:white;border-radius:50%;width:19px;height:19px;margin-left:8px;font-size:10px}
+.menu-trigger,.mobile-nav{display:none}
+.hero{min-height:590px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;max-width:1320px;margin:auto;padding:70px clamp(24px,8vw,120px) 80px;overflow:hidden}
+.hero-copy{position:relative;z-index:1}.eyebrow{font-size:9px;letter-spacing:.22em;color:var(--gold);font-weight:700;margin-bottom:22px}
+.hero h1{font:400 clamp(48px,6vw,82px)/1.08 var(--serif);letter-spacing:-.045em}.hero h1 em,.section-heading h2 em{color:var(--gold);font-weight:400}
+.hero-description{max-width:390px;color:var(--muted);font-size:14px;margin:24px 0 32px;line-height:1.9}
+.button{min-height:48px;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;gap:24px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:all .2s}
+.button-dark{background:var(--ink);color:white}.button-dark:hover{background:var(--gold);color:white}.button-outline{border:1px solid var(--line);color:var(--ink);background:transparent}.button-outline:hover{border-color:var(--gold)}
+.hero-note{font-size:8px;letter-spacing:.25em;color:#aaa092;margin-top:70px}
+.hero-art{height:420px;position:relative;display:grid;place-items:center;background:radial-gradient(ellipse at center,#e8dfd1 0%,#f0e9df 40%,rgba(246,242,236,0) 72%)}
+.art-orbit{position:absolute;border:1px solid rgba(168,137,88,.25);border-radius:50%;width:340px;height:340px}.orbit-two{width:420px;height:420px;border-color:rgba(168,137,88,.13)}
+.art-bottle{position:relative;display:flex;flex-direction:column;align-items:center;filter:drop-shadow(15px 22px 18px rgba(63,48,30,.16));transform:rotate(-5deg)}
+.bottle-cap{width:48px;height:35px;background:linear-gradient(90deg,#a88958,#e0c99f,#927448);border-radius:4px 4px 0 0}
+.bottle-neck{width:38px;height:17px;background:#c9b28b}
+.bottle-body{width:145px;height:190px;border:1px solid #c5ad83;background:linear-gradient(110deg,rgba(255,255,255,.75),rgba(202,180,145,.5),rgba(255,255,255,.7));border-radius:12px 12px 22px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#8d754e}
+.bottle-body span{font:italic 46px var(--serif)}.bottle-body small{font-size:7px;letter-spacing:.35em}
+.art-caption{position:absolute;bottom:15px;right:5%;font-size:8px;letter-spacing:.2em;color:#9a8b75;line-height:2}.art-caption b{font-weight:600}
+.section-wrap{max-width:1240px;margin:auto;padding:90px 30px 105px}
+.section-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:35px}.section-heading .eyebrow{margin-bottom:10px}
+.section-heading h2{font:400 clamp(34px,4vw,48px)/1.2 var(--serif)}.section-heading>p{max-width:270px;color:var(--muted);font-size:12px}
+.filters{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}.filter-btn{padding:9px 18px;border:1px solid var(--line);background:transparent;color:#746d63;font-size:10px;letter-spacing:.05em}.filter-btn.active,.filter-btn:hover{background:var(--ink);border-color:var(--ink);color:white}
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.product-card{background:var(--white);border:1px solid #e9e1d6;transition:transform .25s,box-shadow .25s;min-width:0}.product-card:hover{transform:translateY(-4px);box-shadow:0 18px 35px rgba(48,39,27,.08)}
+.product-photo{width:100%;height:280px;display:block;position:relative;background:#eee8df;overflow:hidden}.product-photo img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;transition:transform .4s}.product-card:hover .product-photo img{transform:scale(1.04)}
+.product-tag{position:absolute;top:15px;left:15px;background:rgba(246,242,236,.9);padding:6px 10px;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:#7d6847}
+.product-content{padding:20px}.product-kicker{font-size:9px;color:var(--muted);letter-spacing:.08em;margin-bottom:6px}.product-content h3{font:400 25px var(--serif);margin-bottom:17px}
+.product-card-bottom{display:flex;align-items:center;justify-content:space-between;margin-bottom:17px}.product-card-bottom strong{font-size:17px;font-weight:600}.details-link{background:none;color:var(--gold);font-size:10px}
+.full{width:100%}
+.promise{background:var(--paper2);padding:58px clamp(24px,8vw,120px);display:grid;grid-template-columns:repeat(3,1fr);gap:50px}
+.promise>div{max-width:280px}.promise span{font:italic 26px var(--serif);color:var(--gold)}.promise h3{font:400 21px var(--serif);margin:10px 0}.promise p{font-size:11px;color:var(--muted);line-height:1.8}
+footer{padding:50px clamp(24px,8vw,120px) 20px;background:#282622;color:#f4eee5}.footer-main{display:flex;align-items:center;justify-content:space-between;gap:25px;padding-bottom:38px}.brand-footer{color:white}.brand-footer small{color:#b5aa9a}.footer-main p{color:#c0b7aa;font:italic 17px var(--serif)}.footer-whatsapp{font-size:10px;letter-spacing:.1em;border-bottom:1px solid var(--gold);padding-bottom:7px}.footer-bottom{text-align:center;border-top:1px solid #49443c;padding-top:18px;color:#a79e92;font-size:9px;letter-spacing:.05em}
+.overlay,.cart-overlay{position:fixed;inset:0;background:rgba(28,25,21,.58);z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .22s}.overlay.open,.cart-overlay.open{opacity:1;pointer-events:auto}
+.product-modal{position:relative;background:var(--paper);width:min(850px,100%);max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 25px 80px #17130e44}
+.close-btn{width:35px;height:35px;background:transparent;font-size:26px;color:var(--muted);line-height:1}.product-modal>.close-btn{position:absolute;right:13px;top:10px;z-index:2}
+.modal-image{background:#eee7dc;min-height:400px}.modal-image img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.modal-info{padding:55px 38px 35px}.modal-info .eyebrow{margin-bottom:12px}.modal-info h2{font:400 36px/1.15 var(--serif)}.muted,.description{color:var(--muted);font-size:12px}.modal-price{font-size:25px;font-weight:600;margin:22px 0}.description{line-height:1.9;margin-bottom:22px}.quantity{display:flex;align-items:center;gap:22px;margin-bottom:18px}.quantity button{width:32px;height:32px;border:1px solid var(--line);background:transparent;font-size:18px}.quantity span{font-size:13px}.modal-info .button{margin-top:9px}
+.cart-overlay{justify-content:flex-end;padding:0}.cart-drawer{height:100%;width:min(440px,100%);background:var(--paper);padding:25px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s}.cart-overlay.open .cart-drawer{transform:translateX(0)}
+.drawer-heading{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:17px}.drawer-heading h2{font:400 28px var(--serif)}.cart-items{overflow:auto;flex:1;padding:20px 0}.empty-cart{text-align:center;color:var(--muted);padding:50px 10px;font:italic 18px var(--serif)}
+.cart-row{display:grid;grid-template-columns:65px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.cart-row img{width:65px;height:65px;object-fit:contain;background:#eee7dc;mix-blend-mode:multiply}.cart-row-info{display:flex;flex-direction:column;gap:3px}.cart-row-info b{font:400 16px var(--serif)}.cart-row-info small{font-size:10px;color:var(--muted)}.cart-row>strong{font-size:12px}.remove-link{align-self:flex-start;background:none;color:#9a6f60;font-size:9px;text-decoration:underline}
+.drawer-footer{border-top:1px solid var(--line);padding-top:17px;display:flex;flex-direction:column;gap:13px}.drawer-footer[hidden]{display:none}.gift-line,.field-label{font-size:10px;color:#615b53}.gift-line{display:flex;gap:8px;align-items:center}.field-label{display:flex;flex-direction:column;gap:5px}.field-label input,.field-label textarea{border:1px solid var(--line);background:var(--white);padding:10px;font-size:11px;resize:vertical;outline:none}.total-line{display:flex;justify-content:space-between;align-items:center;font-size:12px}.total-line strong{font-size:20px}.fine-print{text-align:center;color:var(--muted);font-size:9px}
+@media(max-width:760px){.site-header{height:68px;padding:0 18px}.desktop-nav{display:none}.cart-trigger{margin-left:auto;margin-right:10px}.menu-trigger{display:block;background:none;font-size:21px;color:var(--ink)}.mobile-nav.open{display:flex;position:absolute;top:68px;left:0;right:0;background:var(--paper);padding:18px 24px;gap:20px;z-index:19;border-bottom:1px solid var(--line)}.hero{grid-template-columns:1fr;min-height:auto;padding:75px 25px 45px}.hero h1{font-size:clamp(48px,12vw,68px)}.hero-art{height:330px;margin-top:20px}.art-orbit{width:270px;height:270px}.orbit-two{width:330px;height:330px}.section-wrap{padding:65px 20px}.section-heading{display:block}.section-heading>p{margin-top:13px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-photo{height:210px}.product-content{padding:13px}.product-content h3{font-size:20px}.product-card-bottom{align-items:flex-start;flex-direction:column;gap:7px}.promise{grid-template-columns:1fr;gap:28px;padding:45px 28px}.promise>div{max-width:none}.footer-main{align-items:flex-start;flex-direction:column}.product-modal{grid-template-columns:1fr;max-height:92vh}.modal-image{min-height:230px;height:250px}.modal-info{padding:28px 23px}.modal-info h2{font-size:30px}}
+@media(max-width:390px){.product-grid{grid-template-columns:1fr}.product-photo{height:260px}.cart-trigger{padding:8px 10px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}

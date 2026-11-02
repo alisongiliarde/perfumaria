@@ -6,7 +6,7 @@ const products = [
     id: "ez-vip-black",
     name: "EZ VIP Black",
     short: "Eau de Parfum · linha EZ VIP",
-    price: 55,
+    price: 60,
     image: "Assets/ez-vip-black.jpg",
     description: "Com frasco em degradê preto e cinza e a assinatura Define the Moment, é uma opção de estilo moderno e sofisticado. Consulte a embalagem para conferir as informações oficiais do fabricante.",
     tag: "Estilo sofisticado"
@@ -15,7 +15,7 @@ const products = [
     id: "ez-black",
     name: "EZ Black",
     short: "Eau de Parfum · linha EZ",
-    price: 55,
+    price: 60,
     image: "Assets/ez-black.jpg",
     description: "Uma opção de perfil elegante e marcante, com apresentação escura e visual sofisticado. Consulte a embalagem para conferir as informações oficiais do fabricante.",
     tag: "Presença marcante"

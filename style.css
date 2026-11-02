@@ -208,3 +208,25 @@ footer{padding:50px clamp(24px,8vw,120px) 20px;background:#282622;color:#f4eee5}
     height: 31px;
   }
 }
+.whatsapp-float {
+  position: fixed !important;
+  right: 20px !important;
+  bottom: 20px !important;
+  width: 58px !important;
+  height: 58px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #25D366 !important;
+  color: white !important;
+  border-radius: 50% !important;
+  z-index: 40 !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  text-decoration: none !important;
+}
+
+.whatsapp-float svg {
+  width: 30px !important;
+  height: 30px !important;
+  display: block !important;
+}

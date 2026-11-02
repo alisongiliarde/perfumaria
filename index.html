@@ -1,226 +1,91 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Alison Perfumaria — fragrâncias que marcam presença. Pedido pelo WhatsApp." />
-  <meta name="theme-color" content="#0a0a0a" />
-  <title>Alison Perfumaria | Fragrâncias para marcar presença</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f2ec">
+  <meta name="description" content="Alison Perfumaria — fragrâncias para marcar presença.">
+  <title>Alison Perfumaria | Sua próxima fragrância</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<header class="site-header">
+  <a class="brand" href="#inicio" aria-label="Alison Perfumaria início">
+    <span class="brand-mark">A</span><span>ALISON <small>PERFUMARIA</small></span>
+  </a>
+  <nav class="desktop-nav"><a href="#colecao">Coleção</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a></nav>
+  <button class="cart-trigger" id="cartBtn" aria-label="Abrir sacola">Sacola <span id="cartCount">0</span></button>
+  <button class="menu-trigger" id="menuBtn" aria-label="Abrir menu">☰</button>
+</header>
+<nav class="mobile-nav" id="mobileNav"><a href="#colecao">Coleção</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a></nav>
 
-  <!-- HEADER -->
-  <header class="header" id="header">
-    <div class="header__inner">
-      <a href="index.html" class="logo">
-        <span class="logo__a">A.</span>
-        <span class="logo__brand">ALISON<br><small>PERFUMARIA</small></span>
-      </a>
-      <nav class="nav">
-        <a href="index.html" class="nav__link nav__link--active">Coleção</a>
-        <a href="#sobre" class="nav__link">Sobre</a>
-        <a href="#contato" class="nav__link">Contato</a>
-      </nav>
-      <button class="cart-btn" id="cartBtn" aria-label="Ver carrinho">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <span class="cart-btn__label">Seu pedido</span>
-        <span class="cart-btn__count" id="cartCount">0</span>
-      </button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <nav class="nav--mobile" id="mobileNav">
-      <a href="index.html" class="nav__link">Coleção</a>
-      <a href="#sobre" class="nav__link">Sobre</a>
-      <a href="#contato" class="nav__link">Contato</a>
-    </nav>
-  </header>
-
-  <!-- HERO -->
+<main id="inicio">
   <section class="hero">
-    <div class="hero__eyebrow">Fragrâncias para marcar presença</div>
-    <h1 class="hero__title">Uma fragrância.<br><em>Uma presença.</em></h1>
-    <p class="hero__sub">Perfumes selecionados para quem sabe que o detalhe faz a diferença.</p>
-    <a href="#colecao" class="btn btn--ghost">Conhecer coleção ↘</a>
-    <div class="hero__scroll-hint">E.</div>
+    <div class="hero-copy">
+      <p class="eyebrow">ALISON PERFUMARIA · CURADORIA DE FRAGRÂNCIAS</p>
+      <h1>Uma fragrância.<br><em>Uma presença.</em></h1>
+      <p class="hero-description">Encontre o aroma que traduz seu estilo e transforma cada momento em uma lembrança.</p>
+      <a class="button button-dark" href="#colecao">Explorar coleção <span>↗</span></a>
+      <div class="hero-note">SUA ESSÊNCIA, SUA ASSINATURA.</div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+      <div class="art-bottle"><div class="bottle-cap"></div><div class="bottle-neck"></div><div class="bottle-body"><span>A.</span><small>PARFUM</small></div></div>
+      <div class="art-caption">EAU DE PARFUM<br><b>THE ART OF SCENT</b></div>
+    </div>
   </section>
 
-  <!-- COLEÇÃO -->
-  <section class="collection" id="colecao">
-    <div class="collection__header">
-      <p class="section-eyebrow">Seleção especial</p>
-      <h2 class="section-title">Escolha sua fragrância</h2>
-      <p class="section-sub">Perfumes para diferentes estilos e ocasiões.</p>
+  <section class="collection section-wrap" id="colecao">
+    <div class="section-heading">
+      <div><p class="eyebrow">ESCOLHA A SUA</p><h2>Encontre sua <em>fragrância</em></h2></div>
+      <p>Uma seleção especial para acompanhar sua personalidade.</p>
     </div>
-
-    <!-- FILTROS -->
     <div class="filters" id="filters">
-      <button class="filter-btn filter-btn--active" data-filter="todos">Todos</button>
+      <button class="filter-btn active" data-filter="todos">Todos</button>
       <button class="filter-btn" data-filter="masculino">Masculinos</button>
-      <button class="filter-btn" data-filter="feminino">Femininas</button>
+      <button class="filter-btn" data-filter="feminino">Femininos</button>
       <button class="filter-btn" data-filter="unissex">Unissex</button>
     </div>
-
-    <div class="products" id="products">
-      <!-- Renderizado pelo JS -->
-    </div>
+    <div class="product-grid" id="products"></div>
   </section>
 
-  <!-- DIFERENCIAIS -->
-  <section class="features" id="sobre">
-    <div class="features__grid">
-      <div class="feature">
-        <div class="feature__num">01</div>
-        <h3 class="feature__title">Atendimento pessoal</h3>
-        <p class="feature__desc">Tire suas dúvidas antes de escolher. Estamos aqui para ajudar.</p>
-      </div>
-      <div class="feature">
-        <div class="feature__num">02</div>
-        <h3 class="feature__title">Opção para presente</h3>
-        <p class="feature__desc">Adicione uma bolsa de presente ao pedido para surpreender quem você ama.</p>
-      </div>
-      <div class="feature">
-        <div class="feature__num">03</div>
-        <h3 class="feature__title">Pedido pelo WhatsApp</h3>
-        <p class="feature__desc">Confirme os detalhes diretamente conosco, sem complicação.</p>
-      </div>
-    </div>
+  <section class="promise" id="sobre">
+    <div><span>01</span><h3>Escolha com calma</h3><p>Conheça os detalhes de cada fragrância antes de decidir.</p></div>
+    <div><span>02</span><h3>Atendimento pessoal</h3><p>Tire suas dúvidas e receba ajuda para escolher.</p></div>
+    <div><span>03</span><h3>Pedido simples</h3><p>Finalize seu pedido diretamente pelo WhatsApp.</p></div>
   </section>
+</main>
 
-  <!-- RODAPÉ -->
-  <footer class="footer" id="contato">
-    <div class="footer__inner">
-      <div class="footer__brand">
-        <a href="index.html" class="logo">
-          <span class="logo__a">A.</span>
-          <span class="logo__brand">ALISON<br><small>PERFUMARIA</small></span>
-        </a>
-        <p class="footer__tagline">Alison Perfumaria — encontre a fragrância que combina com você.</p>
-        <p class="footer__disclaimer">Preços em reais. Disponibilidade sujeita à confirmação.</p>
-      </div>
-      <div class="footer__contact">
-        <h4 class="footer__heading">Atendimento</h4>
-        <a href="https://wa.me/5500000000000" class="footer__link" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="mailto:contato@alisonperfumaria.com" class="footer__link">E-mail</a>
-        <p class="footer__hours">Seg à Sex · 09h às 18h</p>
-      </div>
+<footer id="contato">
+  <div class="footer-main"><a class="brand brand-footer" href="#inicio"><span class="brand-mark">A</span><span>ALISON <small>PERFUMARIA</small></span></a><p>Encontre a fragrância que combina com você.</p><a class="footer-whatsapp" href="https://wa.me/5581999365569" target="_blank" rel="noopener">Fale com a gente ↗</a></div>
+  <div class="footer-bottom">© 2026 Alison Perfumaria. Preços e disponibilidade sujeitos à confirmação.</div>
+</footer>
+
+<div class="overlay" id="productOverlay" aria-hidden="true">
+  <section class="product-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="close-btn" id="modalClose" aria-label="Fechar">×</button>
+    <div class="modal-image"><img id="modalImg" src="" alt=""></div>
+    <div class="modal-info"><p class="eyebrow">ALISON PERFUMARIA</p><h2 id="modalTitle"></h2><p id="modalShort" class="muted"></p><p class="modal-price" id="modalPrice"></p><p id="modalDescription" class="description"></p><div class="quantity"><button id="qtyMinus" aria-label="Diminuir">−</button><span id="qtyValue">1</span><button id="qtyPlus" aria-label="Aumentar">+</button></div><button class="button button-dark full" id="addToCart">Adicionar à sacola</button><button class="button button-outline full" id="buyNow">Comprar pelo WhatsApp ↗</button></div>
+  </section>
+</div>
+
+<div class="cart-overlay" id="cartOverlay" aria-hidden="true">
+  <aside class="cart-drawer">
+    <div class="drawer-heading"><h2>Sua sacola</h2><button class="close-btn" id="cartClose" aria-label="Fechar">×</button></div>
+    <div class="cart-items" id="cartItems"><p class="empty-cart">Sua sacola está vazia.</p></div>
+    <div class="drawer-footer" id="cartFooter" hidden>
+      <label class="gift-line"><input type="checkbox" id="giftCheck"> Embalagem para presente (+ R$ 7,00)</label>
+      <label class="field-label">Seu nome (opcional)<input id="clientName" type="text" placeholder="Como podemos chamar você?"></label>
+      <label class="field-label">Observação (opcional)<textarea id="clientNote" rows="2" placeholder="Alguma informação sobre o pedido?"></textarea></label>
+      <div class="total-line"><span>Total estimado</span><strong id="cartTotal">R$ 0,00</strong></div>
+      <button class="button button-dark full" id="checkoutBtn">Finalizar pelo WhatsApp ↗</button>
+      <p class="fine-print">Pedido sujeito à confirmação de disponibilidade. Nenhum pagamento é realizado neste site.</p>
     </div>
-    <div class="footer__bottom">
-      <p>© 2026 Alison Perfumaria. Todos os direitos reservados.</p>
-    </div>
-  </footer>
-
-  <!-- MODAL PRODUTO -->
-  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
-    <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal__close" id="modalClose" aria-label="Fechar">✕</button>
-      <div class="modal__body">
-        <div class="modal__gallery">
-          <img src="" alt="" id="modalImg" class="modal__main-img" />
-          <div class="modal__badge" id="modalBadge"></div>
-        </div>
-        <div class="modal__info">
-          <p class="modal__category" id="modalCategory"></p>
-          <h2 class="modal__title" id="modalTitle"></h2>
-          <p class="modal__sku" id="modalSku"></p>
-
-          <div class="modal__price-block">
-            <span class="modal__price-old" id="modalPriceOld"></span>
-            <span class="modal__price-new" id="modalPriceNew"></span>
-            <span class="modal__discount" id="modalDiscount"></span>
-          </div>
-          <p class="modal__installment" id="modalInstallment"></p>
-
-          <!-- NOTA CUPOM -->
-          <div class="modal__coupon" id="modalCoupon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-            <span>Use o cupom <strong id="modalCouponCode"></strong> para ganhar 22% OFF adicional.</span>
-          </div>
-
-          <!-- PIRÂMIDE OLFATIVA -->
-          <div class="pyramid" id="pyramidBlock">
-            <h4 class="pyramid__title">Pirâmide Olfativa</h4>
-            <div class="pyramid__row">
-              <span class="pyramid__label">Topo</span>
-              <span class="pyramid__notes" id="pyramidTop"></span>
-            </div>
-            <div class="pyramid__row">
-              <span class="pyramid__label">Coração</span>
-              <span class="pyramid__notes" id="pyramidHeart"></span>
-            </div>
-            <div class="pyramid__row">
-              <span class="pyramid__label">Base</span>
-              <span class="pyramid__notes" id="pyramidBase"></span>
-            </div>
-          </div>
-
-          <!-- ESTOQUE + BOTÕES -->
-          <div class="modal__stock" id="modalStock"></div>
-
-          <div class="modal__qty-row">
-            <div class="qty-control">
-              <button class="qty-btn" id="qtyMinus" aria-label="Diminuir">−</button>
-              <input type="number" class="qty-input" id="qtyInput" value="1" min="1" max="99" readonly />
-              <button class="qty-btn" id="qtyPlus" aria-label="Aumentar">+</button>
-            </div>
-          </div>
-
-          <div class="modal__actions">
-            <button class="btn btn--secondary" id="addToCart">Adicionar ao pedido</button>
-            <button class="btn btn--primary" id="buyNow">Pedir pelo WhatsApp ↗</button>
-          </div>
-
-          <p class="modal__disclaimer">Nenhum pagamento é cobrado neste site. O pedido é confirmado pelo WhatsApp.</p>
-        </div>
-      </div>
-
-      <!-- VOCÊ TAMBÉM PODE GOSTAR -->
-      <div class="modal__related">
-        <h3 class="modal__related-title">Você também pode gostar</h3>
-        <div class="related-grid" id="relatedGrid"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PAINEL CARRINHO -->
-  <div class="cart-overlay" id="cartOverlay" aria-hidden="true">
-    <div class="cart-panel" id="cartPanel">
-      <div class="cart-panel__header">
-        <h2 class="cart-panel__title">Seu pedido</h2>
-        <button class="cart-panel__close" id="cartClose" aria-label="Fechar carrinho">✕</button>
-      </div>
-      <div class="cart-panel__items" id="cartItems">
-        <p class="cart-panel__empty">Nenhum item adicionado ainda.</p>
-      </div>
-      <div class="cart-panel__footer" id="cartFooter" style="display:none">
-        <div class="cart-panel__gift">
-          <label class="gift-option">
-            <input type="checkbox" id="giftCheck" />
-            <span class="gift-option__text">
-              <strong>Bolsa para presente Hinode</strong>
-              <small>Tamanho P · embalagem adicional para presentear · R$ 7,00</small>
-            </span>
-          </label>
-        </div>
-        <div class="cart-panel__total">
-          <span>Total estimado</span>
-          <strong id="cartTotal">R$ 0,00</strong>
-        </div>
-        <div class="cart-panel__form">
-          <input type="text" class="form-input" id="clientName" placeholder="Seu nome (opcional)" />
-          <textarea class="form-input form-input--textarea" id="clientNote" placeholder="Observação (opcional)" rows="2"></textarea>
-        </div>
-        <button class="btn btn--primary btn--full" id="checkoutBtn">Continuar pelo WhatsApp ↗</button>
-        <p class="cart-panel__disclaimer">O pedido será enviado para confirmação. Nenhum pagamento é cobrado neste site.</p>
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+  </aside>
+</div>
+<script src="script.js"></script>
 </body>
 </html>

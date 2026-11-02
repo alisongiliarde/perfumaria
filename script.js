@@ -5,10 +5,6 @@
   const GIFT_PRICE = 7;
   const products = [
     {id:"ez-vip-black",name:"EZ VIP Black",short:"Eau de Parfum · linha EZ VIP",price:60,image:"./Assets/ez-vip-black.jpg",description:"Uma opção de estilo moderno e sofisticado, com apresentação marcante.",category:"masculino",tag:"Presença marcante"
-notes: {
-  top: ["Absinto", "Anis", "Erva-doce"],
-  heart: ["Lavanda"],
-  base: ["Casca de baunilha negra", "Almíscar"]
 },
     {id:"ez-black",name:"EZ Black",short:"Eau de Parfum · linha EZ",price:60,image:"./Assets/ez-black.jpg",description:"Uma fragrância de perfil elegante e marcante, com visual sofisticado.",category:"masculino",tag:"Estilo sofisticado"},
     {id:"ez-vip-men",name:"EZ VIP Men",short:"Eau de Parfum · linha EZ VIP",price:55,image:"./Assets/ez-vip-men.jpg",description:"Uma fragrância contemporânea e versátil para diferentes ocasiões.",category:"masculino",tag:"Versátil"}

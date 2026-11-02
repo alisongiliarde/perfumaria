@@ -127,7 +127,7 @@
       note ? `Observação: ${note}` : "",
       "Pode confirmar a disponibilidade, por favor?"
     ].filter(Boolean);
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\\n"))}`;
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
     const opened = window.open(url,"_blank");
     if (!opened) window.location.href = url;
   }

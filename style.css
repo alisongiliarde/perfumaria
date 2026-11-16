@@ -162,4 +162,4 @@ footer{padding:50px clamp(24px,8vw,120px) 20px;background:#282622;color:#f4eee5}
   .brand small{font-size:8px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
-/* Botão flutuante do WhatsApp 
+/* Botão flutuante do WhatsApp

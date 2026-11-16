@@ -4,11 +4,187 @@
   const WHATSAPP_NUMBER = "5581999365569";
   const GIFT_PRICE = 7;
   const products = [
-    {id:"ez-vip-black",name:"EZ VIP Black",short:"Eau de Parfum · linha EZ VIP",price:60,image:"./Assets/ez-vip-black.jpg",description:"Uma opção de estilo moderno e sofisticado, com apresentação marcante.",category:"masculino",tag:"Presença marcante"
-},
-    {id:"ez-black",name:"EZ Black",short:"Eau de Parfum · linha EZ",price:60,image:"./Assets/ez-black.jpg",description:"Uma fragrância de perfil elegante e marcante, com visual sofisticado.",category:"masculino",tag:"Estilo sofisticado"},
-    {id:"ez-vip-men",name:"EZ VIP Men",short:"Eau de Parfum · linha EZ VIP",price:55,image:"./Assets/ez-vip-men.jpg",description:"Uma fragrância contemporânea e versátil para diferentes ocasiões.",category:"masculino",tag:"Versátil"}
-  ];
+    {
+        "id": "ez-black",
+        "name": "EZ Black",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-black.jpg",
+        "description": "Família olfativa: amadeirado frutado oriental. Notas de maçã vermelha, canela e baunilha.",
+        "category": "masculino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-kaya-ocean",
+        "name": "EZ Kaya Ocean",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-kaya-ocean.jpg",
+        "description": "Família olfativa: aromático amadeirado. Notas de bergamota, limão e sândalo.",
+        "category": "masculino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-lalac-legacy",
+        "name": "EZ Lalac Legacy",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-lalac-legacy.jpg",
+        "description": "Família olfativa: aromático verde amadeirado. Notas de lima, manjericão e musgo de carvalho.",
+        "category": "masculino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-million",
+        "name": "EZ Million",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-million.jpg",
+        "description": "Eau de Parfum da linha EZ em frasco de 100 ml. Consulte a disponibilidade.",
+        "category": "masculino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-red",
+        "name": "EZ Red",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-red.jpg",
+        "description": "Família olfativa: amadeirado. Notas de limão, menta, cedro e fava tonka.",
+        "category": "masculino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-sexy-men",
+        "name": "EZ Sexy Men",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-sexy-men.jpg",
+        "description": "Eau de Parfum da linha EZ em frasco de 100 ml. Consulte a disponibilidade.",
+        "category": "masculino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-silver-essence",
+        "name": "EZ Silver Essence",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-silver-essence.jpg",
+        "description": "Família olfativa: cítrico amadeirado especiado. Notas de limão, noz-moscada e fava tonka.",
+        "category": "masculino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-vip-black",
+        "name": "EZ VIP Black",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-vip-black.jpg",
+        "description": "Eau de Parfum da linha EZ em frasco de 100 ml. Consulte a disponibilidade.",
+        "category": "masculino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-vip-men",
+        "name": "EZ VIP Men",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-vip-men.jpg",
+        "description": "Eau de Parfum da linha EZ em frasco de 100 ml. Consulte a disponibilidade.",
+        "category": "masculino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-zaro-black",
+        "name": "EZ Zaro Black",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-zaro-black.jpg",
+        "description": "Eau de Parfum da linha EZ em frasco de 100 ml. Consulte a disponibilidade.",
+        "category": "masculino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-zaro-wanted",
+        "name": "EZ Zaro Wanted",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-zaro-wanted.jpg",
+        "description": "Eau de Parfum da linha EZ em frasco de 100 ml. Consulte a disponibilidade.",
+        "category": "masculino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-good",
+        "name": "EZ Good",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-good.jpg",
+        "description": "Família olfativa: oriental amadeirado. Notas de flor de laranjeira, cacau e baunilha.",
+        "category": "feminino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-la-vie-wonderfull",
+        "name": "EZ La Vie Wonderfull",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-la-vie-wonderfull.jpg",
+        "description": "Eau de Parfum da linha EZ em frasco de 100 ml. Consulte a disponibilidade.",
+        "category": "feminino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-olymp",
+        "name": "EZ Olymp",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-olymp.jpg",
+        "description": "Notas de jasmim aquático, mandarina verde, baunilha e sândalo.",
+        "category": "feminino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-scand",
+        "name": "EZ Scand",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-scand.jpg",
+        "description": "Eau de Parfum da linha EZ em frasco de 100 ml. Consulte a disponibilidade.",
+        "category": "feminino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-sexy-woman",
+        "name": "EZ Sexy Woman",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-sexy-woman.jpg",
+        "description": "Eau de Parfum da linha EZ em frasco de 100 ml. Consulte a disponibilidade.",
+        "category": "feminino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-vip-rose",
+        "name": "EZ VIP Rose",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-vip-rose.jpg",
+        "description": "Eau de Parfum da linha EZ em frasco de 100 ml. Consulte a disponibilidade.",
+        "category": "feminino",
+        "tag": "Eau de Parfum"
+    },
+    {
+        "id": "ez-yes-to-grace",
+        "name": "EZ Yes to Grace",
+        "short": "Eau de Parfum · linha EZ",
+        "price": 60,
+        "image": "./Assets/ez-yes-to-grace.jpg",
+        "description": "Eau de Parfum da linha EZ em frasco de 100 ml. Consulte a disponibilidade.",
+        "category": "feminino",
+        "tag": "Eau de Parfum"
+    }
+];
 
   const $ = id => document.getElementById(id);
   const money = value => Number(value).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
